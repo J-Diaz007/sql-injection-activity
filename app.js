@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 const db = new sqlite3.Database(':memory:');
 db.serialize(function () {
     db.run("CREATE TABLE user (username TEXT, password TEXT, title TEXT)");
-    db.run("INSERT INTO user VALUES ('privilegedUser', 'privilegedUser1', 'Administrator')");
+    db.run("INSERT INTO user VALUES ('TestGuy', 'test', 'Administrator')");
 });
 
 // * Creates a GET method route to '/' that will send the HTML file to the browser
