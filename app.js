@@ -10,12 +10,12 @@ app.use(express.static('.'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-// ! SQL Syntax is purposefully written badly for the purpose of the project. SQL queries should NEVER BE WRITTEN THIS WAY!!!
 // * Creates a new sqlite database and populates it
 const db = new sqlite3.Database(':memory:');
 db.serialize(function () {
     db.run("CREATE TABLE user (username TEXT, password TEXT, title TEXT)");
     db.run("INSERT INTO user VALUES ('TestGuy', 'test', 'Administrator')");
+    db.run("INSERT INTO user VALUES ('FunnyGuy', 'test', 'User')");
 });
 
 // * Creates a GET method route to '/' that will send the HTML file to the browser
@@ -23,6 +23,7 @@ app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
+// ! SQL Syntax is purposefully written badly for the purpose of the project. SQL queries should NEVER BE WRITTEN THIS WAY!!!
 // * Creates a POST method route to '/login' that will handle any forms that are submitted
 app.post('/login', function (req, res) {
 	let username = req.body.username;
